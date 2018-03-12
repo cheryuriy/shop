@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
-
+#python manage.py runserver
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
@@ -13,8 +13,8 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=200)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    # description = models.CharField(max_length=4000)
-    # quantity = models.IntegerField(default=1)
+    description = models.CharField(max_length=4000, default='')
+    quantity = models.IntegerField(default=1)
     incoming_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -24,8 +24,8 @@ class Product(models.Model):
 class Provider(models.Model):
     product = models.ManyToManyField(Product)
     name = models.CharField(max_length=200)
-    phone = models.IntegerField(default=0)
-    # email = models.EmailField()
+    phone = models.CharField(max_length=24)  #  IntegerField(default=0)
+    email = models.EmailField(default = None)
 
     def __str__(self):
         return self.name
