@@ -23,15 +23,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6&u07d!c1#y%vy*vnuznhi*%7pb-g&j(sx8z@=onib+7fa#_zx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False # True #
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1"] # "127.0.0.1"
+
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'shop.apps.RollsConfig',
+    'shop.apps.ShopConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,13 +50,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+# 'django.core.files.storage.FileSystemStorage',
 
 ROOT_URLCONF = 'my2site.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [], # os.path.join(BASE_DIR, 'templates')
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -78,8 +81,8 @@ DATABASES = {
     'default': {
 	'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'shop',
-        'USER': 'yuriy',          #  'postgres',       #
-        'PASSWORD': '12345',      #  'postgres',   #
+        'USER': 'postgres',       # 'yuriy',
+        'PASSWORD': 'postgres',   # '12345',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -123,3 +126,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/' # 'http://127.0.0.1:8000/' # shop/media/
+MEDIA_ROOT = '/var/www/media/' # - NGINX # os.path.join(BASE_DIR, 'media')
